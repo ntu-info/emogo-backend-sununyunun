@@ -3,6 +3,10 @@
 EmoGo 是一個情緒與壓力記錄系統的後端服務，提供影片上傳、記錄儲存與資料匯出功能。
 
 ## 📌 重要連結
+### 📱 APP URL
+```
+https://expo.dev/accounts/feengyun/projects/emo-go-app/builds/575b1fe3-0e1a-4747-bf45-b1b61b3a36d7
+```
 
 ### 🌐 Public Backend URL
 ```
