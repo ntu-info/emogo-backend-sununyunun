@@ -100,6 +100,51 @@ async def upload_record(record: RecordData):
     except Exception as e:
         raise HTTPException(500, f"Save failed: {e}")
 
+from fastapi.responses import StreamingResponse
+import io
+import zipfile
+import json
+
+@app.get("/download/all")
+async def download_all():
+    """
+    打包所有紀錄 + 所有影片為 ZIP 檔
+    """
+    try:
+        # 讀取所有紀錄
+        records = await app.db["records"].find().to_list(99999)
+        for r in records:
+            r["_id"] = str(r["_id"])
+            if "created_at" in r:
+                r["created_at"] = r["created_at"].isoformat()
+
+        # 建立記憶體中的 zip buffer
+        zip_buffer = io.BytesIO()
+
+        with zipfile.ZipFile(zip_buffer, "w", zipfile.ZIP_DEFLATED) as zip_file:
+
+            # 加入 records.json
+            zip_file.writestr("records.json", json.dumps(records, indent=2))
+
+            # 加入所有影片
+            for filename in os.listdir(UPLOAD_DIR):
+                file_path = os.path.join(UPLOAD_DIR, filename)
+                if os.path.isfile(file_path):
+                    zip_file.write(file_path, f"videos/{filename}")
+
+        zip_buffer.seek(0)
+
+        # 回傳 ZIP
+        return StreamingResponse(
+            zip_buffer,
+            media_type="application/zip",
+            headers={
+                "Content-Disposition": "attachment; filename=emogo_export.zip"
+            }
+        )
+
+    except Exception as e:
+        raise HTTPException(500, f"Download failed: {e}")
 
 @app.get("/export")
 async def export_data():
