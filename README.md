@@ -14,7 +14,7 @@ https://emogo-backend-sununyunun.onrender.com
 https://emogo-backend-sununyunun.onrender.com/export
 ```
 
-### 📖 API 文件
+### 📖 API 文件 (助教請用這個看 ><)
 ```
 https://emogo-backend-sununyunun.onrender.com/docs
 ```
