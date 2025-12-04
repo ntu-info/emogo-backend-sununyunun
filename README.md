@@ -106,23 +106,33 @@ file: (影片檔案)
   "exported_at": "2025-01-20T14:20:00Z"
 }
 ```
+### 4.一鍵下載所有紀錄 + 影片
+
+**Endpoint:** `GET /download/all`
+
+**描述:** 下載一個 emogo_export.zip，內容包含：
+
+records.json（所有紀錄）
+
+videos/（所有 vlog 檔案）
 
 ---
+---
 
-### 4. 健康檢查
+### 5. 健康檢查
 **Endpoint:** `GET /health`
 
 **描述:** 檢查後端與 MongoDB 連線狀態
 
 ---
-### 5. 刪除單一影片
+### 6. 刪除單一影片
 
 **Endpoint:** `DELETE /videos/{filename}`
 
 **描述:** 刪除 vlogs/ 中指定檔案。
 
----
-### 6.刪除單一記錄 + 同步刪除影片
+
+### 7.刪除單一記錄 + 同步刪除影片
 
 **Endpoint:** `DELETE /records/{record_id}`
 
@@ -142,8 +152,8 @@ file: (影片檔案)
   "deleted_video": "abc.mp4"
 }
 ```
----
-### 7.刪除全部記錄 + 全部影片
+
+### 8.刪除全部記錄 + 全部影片
 
 **Endpoint:** `DELETE /records/delete/all`
 
@@ -192,7 +202,7 @@ first_record_at：第一筆 timestamp
 latest_record_at：最新一筆 timestamp
 
 ---
----
+
 
 ## 🔧 本地開發
 
